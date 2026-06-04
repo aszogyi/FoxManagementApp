@@ -1,9 +1,75 @@
-<html xmlns:h="http://xmlns.jcp.org/jsf/html">
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
 <h:head>
     <title>Fox Management</title>
 </h:head>
+
 <h:body>
-    <h1>Fox Management App</h1>
-    <h:outputText value="JSF is working." />
+
+    <h1>Fox Management</h1>
+
+    <h:form id="foxForm">
+
+        <h:panelGrid columns="2">
+
+            <h:outputLabel value="Name:"/>
+            <h:inputText value="#{foxBean.fox.name}"/>
+
+            <h:outputLabel value="Age:"/>
+            <h:inputText value="#{foxBean.fox.age}"/>
+
+            <h:outputLabel value="Color:"/>
+            <h:inputText value="#{foxBean.fox.color}"/>
+
+            <h:outputLabel value="Image URL:"/>
+            <h:inputText value="#{foxBean.fox.imageUrl}"/>
+
+        </h:panelGrid>
+
+        <br/>
+
+        <h:commandButton value="Save Fox" action="#{foxBean.save}"/>
+
+        <br/><br/>
+
+        <h:dataTable value="#{foxBean.foxes}" var="fox" border="1">
+
+            <h:column>
+                <f:facet name="header">ID</f:facet>
+                #{fox.id}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Name</f:facet>
+                #{fox.name}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Age</f:facet>
+                #{fox.age}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Color</f:facet>
+                #{fox.color}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Image URL</f:facet>
+                #{fox.imageUrl}
+            </h:column>
+
+            <h:column>
+                <f:facet name="header">Actions</f:facet>
+                <h:commandButton value="Delete" action="#{foxBean.delete(fox.id)}"/>
+            </h:column>
+
+        </h:dataTable>
+
+    </h:form>
+
 </h:body>
 </html>
