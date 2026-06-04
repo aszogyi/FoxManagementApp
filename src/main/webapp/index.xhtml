@@ -18,11 +18,14 @@
             <h:outputLabel value="Name:"/>
             <h:inputText value="#{foxBean.fox.name}"/>
 
-            <h:outputLabel value="Age:"/>
-            <h:inputText value="#{foxBean.fox.age}"/>
+            <h:outputLabel value="Gender:"/>
+            <h:selectOneMenu value="#{foxBean.fox.gender}">
+                <f:selectItem itemLabel="Male" itemValue="MALE"/>
+                <f:selectItem itemLabel="Female" itemValue="FEMALE"/>
+            </h:selectOneMenu>
 
-            <h:outputLabel value="Color:"/>
-            <h:inputText value="#{foxBean.fox.color}"/>
+            <h:outputLabel value="Species:"/>
+            <h:inputText value="#{foxBean.fox.species}"/>
 
             <h:outputLabel value="Image URL:"/>
             <h:inputText value="#{foxBean.fox.imageUrl}"/>
@@ -48,13 +51,13 @@
             </h:column>
 
             <h:column>
-                <f:facet name="header">Age</f:facet>
-                #{fox.age}
+                <f:facet name="header">Species</f:facet>
+                #{fox.species}
             </h:column>
 
             <h:column>
-                <f:facet name="header">Color</f:facet>
-                #{fox.color}
+                <f:facet name="header">Gender</f:facet>
+                #{fox.gender}
             </h:column>
 
             <h:column>

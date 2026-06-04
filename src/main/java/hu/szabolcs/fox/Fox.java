@@ -1,6 +1,9 @@
 package hu.szabolcs.fox;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 
 @Entity
 @Table(name = "FOX")
@@ -10,21 +13,25 @@ public class Fox {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @NotBlank(message = "Name must not be empty")
     private String name;
 
-    private Integer age;
-
-    private String color;
+    @NotBlank(message = "Species must not be empty")
+    private String species;
 
     private String imageUrl;
+
+    @Enumerated(EnumType.STRING)
+    @NotNull(message = "Gender must not be null")
+    private Gender gender;
 
     public Fox() {
     }
 
-    public Fox(String name, Integer age, String color, String imageUrl) {
+    public Fox(String name, String species, Gender gender, String imageUrl) {
         this.name = name;
-        this.age = age;
-        this.color = color;
+        this.species = species;
+        this.gender = gender;
         this.imageUrl = imageUrl;
     }
 
@@ -36,12 +43,8 @@ public class Fox {
         return name;
     }
 
-    public Integer getAge() {
-        return age;
-    }
-
-    public String getColor() {
-        return color;
+    public String getSpecies() {
+        return species;
     }
 
     public String getImageUrl() {
@@ -52,15 +55,19 @@ public class Fox {
         this.name = name;
     }
 
-    public void setAge(Integer age) {
-        this.age = age;
-    }
-
-    public void setColor(String color) {
-        this.color = color;
+    public void setSpecies(String species) {
+        this.species = species;
     }
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl;
+    }
+
+    public Gender getGender() {
+        return gender;
+    }
+
+    public void setGender(Gender gender) {
+        this.gender = gender;
     }
 }

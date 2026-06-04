@@ -47,4 +47,8 @@ public class FoxService {
     public void update(Fox fox) {
         entityManager.merge(fox);
     }
+
+    public Fox findById(Long id) {
+        return entityManager.find(Fox.class, id);
+    }
 }

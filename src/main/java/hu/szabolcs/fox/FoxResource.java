@@ -5,6 +5,7 @@ import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.util.List;
+import javax.validation.Valid;
 
 @Path("/foxes")
 @Produces(MediaType.APPLICATION_JSON)
@@ -20,7 +21,7 @@ public class FoxResource {
     }
 
     @POST
-    public Response create(Fox fox) {
+    public Response create(@Valid Fox fox) {
         foxService.save(fox);
         return Response.status(Response.Status.CREATED).build();
     }
@@ -37,5 +38,17 @@ public class FoxResource {
     public Response deleteAll() {
         foxService.deleteAll();
         return Response.noContent().build();
+    }
+
+    @GET
+    @Path("/{id}")
+    public Fox findById(@PathParam("id") Long id) {
+        Fox fox = foxService.findById(id);
+
+        if (fox == null) {
+            throw new NotFoundException("Fox not found with id: " + id);
+        }
+
+        return fox;
     }
 }
