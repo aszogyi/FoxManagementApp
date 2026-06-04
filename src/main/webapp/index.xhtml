@@ -61,8 +61,16 @@
             </h:column>
 
             <h:column>
-                <f:facet name="header">Image URL</f:facet>
-                #{fox.imageUrl}
+                <f:facet name="header">Image</f:facet>
+
+                <h:graphicImage
+                        value="#{fox.imageUrl}"
+                        width="120"
+                        rendered="#{not empty fox.imageUrl}" />
+
+                <h:outputText
+                        value="No image"
+                        rendered="#{empty fox.imageUrl}" />
             </h:column>
 
             <h:column>

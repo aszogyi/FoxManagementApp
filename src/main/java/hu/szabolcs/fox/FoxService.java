@@ -22,6 +22,7 @@ public class FoxService {
     }
 
     public void delete(Long id) {
+        System.out.println("Deleting fox with id: " + id);
         Fox fox = entityManager.find(Fox.class, id);
 
         if (fox != null) {
