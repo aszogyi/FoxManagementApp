@@ -34,4 +34,17 @@ public class FoxService {
                 .createQuery("DELETE FROM Fox")
                 .executeUpdate();
     }
+
+    public List<Fox> findFoxesWithoutImage() {
+        return entityManager
+                .createQuery(
+                        "SELECT f FROM Fox f WHERE f.imageUrl IS NULL OR f.imageUrl = ''",
+                        Fox.class
+                )
+                .getResultList();
+    }
+
+    public void update(Fox fox) {
+        entityManager.merge(fox);
+    }
 }

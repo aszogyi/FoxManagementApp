@@ -1,0 +1,58 @@
+package hu.szabolcs.fox;
+
+import javax.ejb.EJB;
+import javax.ejb.Schedule;
+import javax.ejb.Singleton;
+import javax.ejb.Startup;
+import javax.json.Json;
+import javax.json.JsonObject;
+import javax.json.JsonReader;
+import java.io.InputStream;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.List;
+
+@Singleton
+@Startup
+public class FoxImageScheduler {
+
+    private static final String RANDOM_FOX_API_URL = "https://randomfox.ca/floof/";
+
+    @EJB
+    private FoxService foxService;
+
+    @Schedule(second = "*/30", minute = "*", hour = "*", persistent = false)
+    public void updateFoxesWithoutImage() {
+        List<Fox> foxesWithoutImage = foxService.findFoxesWithoutImage();
+
+        for (Fox fox : foxesWithoutImage) {
+            String imageUrl = fetchRandomFoxImageUrl();
+
+            if (imageUrl != null) {
+                fox.setImageUrl(imageUrl);
+                foxService.update(fox);
+            }
+        }
+    }
+
+    private String fetchRandomFoxImageUrl() {
+        try {
+            URL url = new URL(RANDOM_FOX_API_URL);
+
+            HttpURLConnection connection = (HttpURLConnection) url.openConnection();
+            connection.setRequestMethod("GET");
+            connection.setRequestProperty("Accept", "application/json");
+
+            try (InputStream inputStream = connection.getInputStream();
+                 JsonReader jsonReader = Json.createReader(inputStream)) {
+
+                JsonObject jsonObject = jsonReader.readObject();
+                return jsonObject.getString("image", null);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+}
