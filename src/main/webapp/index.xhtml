@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <h:head>
     <title>Fox Management</title>
@@ -34,51 +35,53 @@
 
         <br/>
 
-        <h:commandButton value="Save Fox" action="#{foxBean.save}"/>
+        <p:commandButton value="Save Fox" action="#{foxBean.save}" update="@form" />
 
         <br/><br/>
 
-        <h:dataTable value="#{foxBean.foxes}" var="fox" border="1">
+        <p:dataTable value="#{foxBean.foxes}"
+                     var="fox"
+                     paginator="true"
+                     rows="10">
 
-            <h:column>
-                <f:facet name="header">ID</f:facet>
-                #{fox.id}
-            </h:column>
+            <p:column headerText="ID" sortBy="#{fox.id}">
+                <h:outputText value="#{fox.id}" />
+            </p:column>
 
-            <h:column>
-                <f:facet name="header">Name</f:facet>
-                #{fox.name}
-            </h:column>
+            <p:column headerText="Name"
+                      sortBy="#{fox.name}"
+                      filterBy="#{fox.name}">
+                <h:outputText value="#{fox.name}" />
+            </p:column>
 
-            <h:column>
-                <f:facet name="header">Species</f:facet>
-                #{fox.species}
-            </h:column>
+            <p:column headerText="Species"
+                      sortBy="#{fox.species}"
+                      filterBy="#{fox.species}">
+                <h:outputText value="#{fox.species}" />
+            </p:column>
 
-            <h:column>
-                <f:facet name="header">Gender</f:facet>
-                #{fox.gender}
-            </h:column>
+            <p:column headerText="Gender"
+                      sortBy="#{fox.gender}"
+                      filterBy="#{fox.gender}">
+                <h:outputText value="#{fox.gender}" />
+            </p:column>
 
-            <h:column>
-                <f:facet name="header">Image</f:facet>
+            <p:column headerText="Image">
+                <h:graphicImage value="#{fox.imageUrl}"
+                                width="120"
+                                rendered="#{not empty fox.imageUrl}" />
 
-                <h:graphicImage
-                        value="#{fox.imageUrl}"
-                        width="120"
-                        rendered="#{not empty fox.imageUrl}" />
+                <h:outputText value="No image"
+                              rendered="#{empty fox.imageUrl}" />
+            </p:column>
 
-                <h:outputText
-                        value="No image"
-                        rendered="#{empty fox.imageUrl}" />
-            </h:column>
+            <p:column headerText="Actions">
+                <p:commandButton value="Delete"
+                                 action="#{foxBean.delete(fox.id)}"
+                                 update="@form" />
+            </p:column>
 
-            <h:column>
-                <f:facet name="header">Actions</f:facet>
-                <h:commandButton value="Delete" action="#{foxBean.delete(fox.id)}"/>
-            </h:column>
-
-        </h:dataTable>
+        </p:dataTable>
 
     </h:form>
 

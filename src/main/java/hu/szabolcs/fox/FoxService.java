@@ -4,8 +4,11 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
+import javax.ejb.TransactionAttribute;
+import javax.ejb.TransactionAttributeType;
 
 @Stateless
+@TransactionAttribute(TransactionAttributeType.REQUIRED)
 public class FoxService {
 
     @PersistenceContext(unitName = "foxPU")
@@ -36,20 +39,23 @@ public class FoxService {
                 .executeUpdate();
     }
 
-    public List<Fox> findFoxesWithoutImage() {
-        return entityManager
-                .createQuery(
-                        "SELECT f FROM Fox f WHERE f.imageUrl IS NULL OR f.imageUrl = ''",
-                        Fox.class
-                )
-                .getResultList();
-    }
-
     public void update(Fox fox) {
         entityManager.merge(fox);
     }
 
     public Fox findById(Long id) {
         return entityManager.find(Fox.class, id);
+    }
+
+    public Fox findOneWithoutImage() {
+        List<Fox> foxes = entityManager
+                .createQuery(
+                        "SELECT f FROM Fox f WHERE f.imageUrl IS NULL OR f.imageUrl = ''",
+                        Fox.class
+                )
+                .setMaxResults(1)
+                .getResultList();
+
+        return foxes.isEmpty() ? null : foxes.get(0);
     }
 }

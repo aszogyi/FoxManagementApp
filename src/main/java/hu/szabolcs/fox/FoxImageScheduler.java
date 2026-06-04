@@ -23,15 +23,17 @@ public class FoxImageScheduler {
 
     @Schedule(second = "*/30", minute = "*", hour = "*", persistent = false)
     public void updateFoxesWithoutImage() {
-        List<Fox> foxesWithoutImage = foxService.findFoxesWithoutImage();
+        Fox fox = foxService.findOneWithoutImage();
 
-        for (Fox fox : foxesWithoutImage) {
-            String imageUrl = fetchRandomFoxImageUrl();
+        if (fox == null) {
+            return;
+        }
 
-            if (imageUrl != null) {
-                fox.setImageUrl(imageUrl);
-                foxService.update(fox);
-            }
+        String imageUrl = fetchRandomFoxImageUrl();
+
+        if (imageUrl != null) {
+            fox.setImageUrl(imageUrl);
+            foxService.update(fox);
         }
     }
 
