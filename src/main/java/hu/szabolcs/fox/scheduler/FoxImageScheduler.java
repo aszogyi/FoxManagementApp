@@ -1,4 +1,7 @@
-package hu.szabolcs.fox;
+package hu.szabolcs.fox.scheduler;
+
+import hu.szabolcs.fox.domain.Fox;
+import hu.szabolcs.fox.service.FoxService;
 
 import javax.ejb.EJB;
 import javax.ejb.Schedule;
@@ -10,7 +13,6 @@ import javax.json.JsonReader;
 import java.io.InputStream;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.List;
 
 @Singleton
 @Startup

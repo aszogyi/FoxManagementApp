@@ -1,4 +1,7 @@
-package hu.szabolcs.fox;
+package hu.szabolcs.fox.rest;
+
+import hu.szabolcs.fox.domain.Fox;
+import hu.szabolcs.fox.service.FoxService;
 
 import javax.ejb.EJB;
 import javax.ws.rs.*;

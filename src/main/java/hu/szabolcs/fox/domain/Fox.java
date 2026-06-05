@@ -1,7 +1,6 @@
-package hu.szabolcs.fox;
+package hu.szabolcs.fox.domain;
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 

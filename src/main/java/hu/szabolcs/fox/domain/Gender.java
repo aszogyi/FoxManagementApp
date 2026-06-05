@@ -1,4 +1,4 @@
-package hu.szabolcs.fox;
+package hu.szabolcs.fox.domain;
 
 public enum Gender {
 

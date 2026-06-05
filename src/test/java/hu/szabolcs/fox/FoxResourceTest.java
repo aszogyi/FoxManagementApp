@@ -1,5 +1,9 @@
 package hu.szabolcs.fox;
 
+import hu.szabolcs.fox.domain.Fox;
+import hu.szabolcs.fox.domain.Gender;
+import hu.szabolcs.fox.rest.FoxResource;
+import hu.szabolcs.fox.service.FoxService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

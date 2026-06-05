@@ -1,4 +1,4 @@
-package hu.szabolcs.fox;
+package hu.szabolcs.fox.exception;
 
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.core.Response;

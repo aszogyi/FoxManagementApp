@@ -1,4 +1,4 @@
-package hu.szabolcs.fox;
+package hu.szabolcs.fox.exception;
 
 import javax.ws.rs.NotFoundException;
 import javax.ws.rs.core.Response;

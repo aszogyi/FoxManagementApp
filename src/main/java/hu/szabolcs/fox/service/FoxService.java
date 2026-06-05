@@ -1,4 +1,6 @@
-package hu.szabolcs.fox;
+package hu.szabolcs.fox.service;
+
+import hu.szabolcs.fox.domain.Fox;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
