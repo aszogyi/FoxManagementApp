@@ -130,6 +130,22 @@ Integration testing support can be extended with Arquillian.
 
 ---
 
+## Docker
+
+Build:
+
+```bash
+docker build -t fox-management .
+```
+
+Run:
+
+```bash
+docker run -p 8080:8080 fox-management
+```
+
+---
+
 ## Branching Strategy
 
 * main → PROD
