@@ -78,7 +78,9 @@
             <p:column headerText="Actions">
                 <p:commandButton value="Delete"
                                  action="#{foxBean.delete(fox.id)}"
-                                 update="@form" />
+                                 update="@form"
+                                 process="@this"
+                                 immediate="true" />
             </p:column>
 
         </p:dataTable>
